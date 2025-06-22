@@ -13,6 +13,8 @@ import { useMemo, useState } from "react";
 import { toast } from "sonner";
 import TeamCreateDialog from "./components/TeamCreateDialog";
 import TeamUpdateDialog from "./components/TeamUpdateDialog";
+import ManagePlayerButton from "./components/ManagePlayerButton";
+import ManagePlayerDialog from "./components/ManagePlayerDialog";
 
 const columns: ColumnDef<ITeamItem>[] = [
   {
@@ -41,6 +43,7 @@ export default function TeamList() {
   const createDialog = useDialog();
   const updateDialog = useDialog();
   const confirmDialog = useDialog();
+  const managePlayersDialog = useDialog();
 
   const { teams, deleteTeam } = useTeamContext();
   const [selectedItem, setSelectedItem] = useState<ITeamItem | null>(null);
@@ -55,6 +58,12 @@ export default function TeamList() {
           const item = row.original as ITeamItem;
           return (
             <div className="flex gap-2">
+              <ManagePlayerButton
+                onClick={() => {
+                  setSelectedItem(item);
+                  managePlayersDialog.openDialog();
+                }}
+              />
               <EditButton
                 onClick={() => {
                   setSelectedItem(item);
@@ -110,6 +119,7 @@ export default function TeamList() {
           }
         }}
       />
+      <ManagePlayerDialog dialog={managePlayersDialog} teamItem={selectedItem} />
     </Layout>
   );
 }

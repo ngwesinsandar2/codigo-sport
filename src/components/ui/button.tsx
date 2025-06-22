@@ -48,16 +48,20 @@ const Button = React.forwardRef<
   }
 >(
   (
-    { className, variant, size, asChild = false, isLoading = false, ...props },
+    { className, variant, size, asChild = false, isLoading, ...props },
     ref
   ) => {
     const Comp = asChild ? Slot : "button";
-
+    
     return (
       <Comp
         data-slot="button"
         className={cn(
           "cursor-pointer",
+          {
+            "cursor-pointer": !isLoading,
+            "cursor-auto": isLoading
+          },
           buttonVariants({ variant, size, className })
         )}
         disabled={isLoading}
