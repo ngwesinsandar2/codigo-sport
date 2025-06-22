@@ -10,13 +10,15 @@ import { toast } from "sonner";
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
   headers: {
-    "Content-Type": "application/json"
+    "Content-Type": "application/json",
+    "Authorization": import.meta.env.VITE_API_SECRET_KEY
   },
 });
 
 const onRequest = async (
   config: InternalAxiosRequestConfig
 ): Promise<InternalAxiosRequestConfig> => {
+  config.headers!.Authorization = import.meta.env.VITE_API_SECRET_KEY;
   return config;
 };
 

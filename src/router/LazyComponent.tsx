@@ -7,8 +7,8 @@ export const Login = lazy(() =>
   }))
 );
 //#endregion
-// export const TeamList = lazy(() =>
-//   import("@/pages/teams/TeamList").then((module) => ({
-//     default: module.default
-//   }))
-// );
+export const TeamList = lazy(() =>
+  import("@/pages/teams/TeamList").then((module) => ({
+    default: module.default
+  }))
+);

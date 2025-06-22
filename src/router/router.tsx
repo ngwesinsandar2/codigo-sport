@@ -36,8 +36,7 @@ const router = createBrowserRouter([
         path: ERoutePath.TeamList,
         element: (
           <SuspenseLazy>
-            <></>
-            {/* <Lazy. /> */}
+            <Lazy.TeamList />
           </SuspenseLazy>
         )
       },

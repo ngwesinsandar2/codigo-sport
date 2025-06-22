@@ -1,3 +1,4 @@
 export enum EStorageKeys {
-  UserKey = "user"
+  UserKey = "user",
+  TeamKey = "teams"
 }

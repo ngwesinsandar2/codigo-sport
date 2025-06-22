@@ -18,7 +18,7 @@ export default function Header() {
       <DropdownMenu>
         <DropdownMenuTrigger
           asChild
-          className=""
+          className="float-end"
         >
           <Button
             variant={"ghost"}

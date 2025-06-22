@@ -3,6 +3,7 @@ import { RouterProvider } from "react-router";
 import { Toaster } from "./components/ui/sonner";
 import router from "./router/router";
 import { AuthProvider } from "./context/AuthContext";
+import { TeamProvider } from "./context/TeamContext";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -15,17 +16,19 @@ const queryClient = new QueryClient({
 
 export default function App() {
   return (
-    <AuthProvider>
-      <QueryClientProvider client={queryClient}>
-        <Toaster
-          position="top-center"
-          richColors
-          theme="light"
-          expand={true}
-          closeButton
-        />
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </AuthProvider>
+    <QueryClientProvider client={queryClient}>
+      <Toaster
+        position="top-center"
+        richColors
+        theme="light"
+        expand={true}
+        closeButton
+      />
+      <AuthProvider>
+        <TeamProvider>
+          <RouterProvider router={router} />
+        </TeamProvider>
+      </AuthProvider>
+    </QueryClientProvider>
   );
 }

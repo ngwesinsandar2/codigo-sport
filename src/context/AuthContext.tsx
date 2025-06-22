@@ -1,15 +1,11 @@
 import { EStorageKeys } from "@/constants/storage-keys";
 import { ILoginForm } from "@/pages/auth/Login";
 import { IProfile } from "@/types/auth.interface";
+import { IContextRes } from "@/types/context-res.interface";
 import { decrypt, encrypt } from "@/utils/encrypt-decrypt";
 import { createContext, useContext } from "react";
 
-export interface IAuthRes {
-  status: string;
-  code: number;
-  message: string;
-  data: null | IProfile;
-}
+export type IAuthRes = IContextRes<IProfile>
 
 interface IAuthContext {
   onLogin: (data: ILoginForm) => IAuthRes;
@@ -28,7 +24,7 @@ const AuthContext = createContext<IAuthContext | undefined>(undefined);
 export const useAuthContext = (): IAuthContext => {
   const context = useContext(AuthContext);
   if (context === undefined) {
-    throw new Error('useAuthContext must be used within an AuthProvider');
+    throw new Error("useAuthContext must be used within an AuthProvider");
   }
   return context;
 };
