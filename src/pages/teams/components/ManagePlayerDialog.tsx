@@ -2,7 +2,6 @@ import DialogLayout from "@/components/shared/dialogs/DialogLayout";
 import { Button } from "@/components/ui/button";
 import { Checkbox } from "@/components/ui/checkbox";
 import { ScrollArea } from "@/components/ui/scroll-area";
-import { useTeamContext } from "@/context/TeamContext";
 import { IUseDialogReturn } from "@/hooks/useDialog";
 import { ITeamItem } from "@/types/team.interface";
 import { BalldontlieAPI } from "@balldontlie/sdk";
@@ -31,7 +30,7 @@ export default function ManagePlayerDialog({
     }
   });
 
-  const { updateTeam } = useTeamContext();
+  // const { updateTeam } = useTeamContext();
 
   const playerQuery = useInfiniteQuery({
     queryKey: ["teams"],
@@ -61,6 +60,8 @@ export default function ManagePlayerDialog({
   }, [dialog.isOpen, teamItem?.players]);
 
   const onSubmit = (data: IManagePlayerForm) => {
+    console.log(data);
+    
     // const res = updateTeam(teamId, data);
     // if (res.code === 200) {
     //   toast.success("Update Successful", {
