@@ -1,11 +1,13 @@
 import { EStorageKeys } from "@/constants/storage-keys";
 import { ILoginForm } from "@/pages/auth/Login";
+import { ERoutePath } from "@/router/path.enum";
 import { IProfile } from "@/types/auth.interface";
 import { IContextRes } from "@/types/context-res.interface";
 import { decrypt, encrypt } from "@/utils/encrypt-decrypt";
 import { createContext, useContext } from "react";
+import { useNavigate } from "react-router";
 
-export type IAuthRes = IContextRes<IProfile>
+export type IAuthRes = IContextRes<IProfile>;
 
 interface IAuthContext {
   onLogin: (data: ILoginForm) => IAuthRes;
@@ -30,6 +32,8 @@ export const useAuthContext = (): IAuthContext => {
 };
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
+  const navigate = useNavigate();
+
   const onLogin = (data: ILoginForm): IAuthRes => {
     if (
       data.userName === EDefaultUser.UserName &&
@@ -67,7 +71,10 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
     return null;
   };
 
-  const onLogout = () => localStorage.clear();
+  const onLogout = () => {
+    localStorage.clear();
+    navigate(ERoutePath.Login);
+  };
 
   const value = {
     onLogin,
